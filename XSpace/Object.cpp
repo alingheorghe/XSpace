@@ -17,7 +17,6 @@ Object::Object(GLint shaderProgramme, GLuint _texObject)
 		0.3f, 0.3f, 0.0f, 1.0f, 1.0f,
 		0.0f, 0.3f, 0.0f, 0.0f, 1.0f,
 	};
-std::cout << 123123;
 	GLushort indices[] = {0, 1, 2, 0, 2, 3};
 
 	GLint vertexPosition = glGetAttribLocation(shaderProgramme, "in_position");

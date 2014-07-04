@@ -32,8 +32,8 @@ Display::Display(int width, int height, char* title)
 	}
 
 	glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	this->setWindow(glfwCreateWindow( width, height, title, NULL, NULL));
 
 	const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
