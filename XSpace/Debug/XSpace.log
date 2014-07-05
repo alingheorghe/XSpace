@@ -1,13 +1,8 @@
-﻿Build started 04-Jul-14 14:34:32.
+﻿Build started 04-Jul-14 20:23:53.
      1>Project "E:\XSpace\XSpace\XSpace.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IE:\XSpace\\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Display.cpp Main.cpp Object.cpp stb_image.cpp
-         stb_image.cpp
-         Object.cpp
-         Main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IE:\XSpace\\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Display.cpp
          Display.cpp
-     1>e:\xspace\xspace\display.cpp(3): warning C4101: 'i' : unreferenced local variable
-         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\XSpace\Debug\XSpace.exe" /INCREMENTAL /NOLOGO /LIBPATH:E:\XSpace\\lib glew32.lib glfw3dll.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\XSpace\Debug\XSpace.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\XSpace\Debug\XSpace.lib" /MACHINE:X86 Debug\Display.obj
          Debug\Main.obj
@@ -18,4 +13,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.21
+Time Elapsed 00:00:01.22

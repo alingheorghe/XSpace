@@ -1,10 +1,16 @@
 #include "Object.h"
 
 void Object::draw(){
-	glBindVertexArray(this->vertexArrayObject);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexArrayObject);
-	glDrawElements(GL_TRIANGLES, this->vertexCount, GL_UNSIGNED_SHORT, NULL);
+	glBindVertexArray(vertexArrayObject);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexArrayObject);
+
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, NULL);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texObject);
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+	glBindBuffer(GL_ARRAY_BUFFER, NULL);
 	glBindVertexArray(NULL);
 }
 
@@ -12,7 +18,7 @@ void Object::draw(){
 Object::Object(GLint shaderProgramme, GLuint _texObject)
 {
 	GLfloat vertexBuffer[] = {
-		0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 		0.3f, 0.0f, 0.0f, 1.0f, 0.0f,
 		0.3f, 0.3f, 0.0f, 1.0f, 1.0f,
 		0.0f, 0.3f, 0.0f, 0.0f, 1.0f,
@@ -20,22 +26,20 @@ Object::Object(GLint shaderProgramme, GLuint _texObject)
 	GLushort indices[] = {0, 1, 2, 0, 2, 3};
 
 	GLint vertexPosition = glGetAttribLocation(shaderProgramme, "in_position");
-	GLint texCoord = glGetAttribLocation(shaderProgramme, "texCoord");
-	
-	std::cout << texCoord << " " << 6 * sizeof(GLushort);
+	GLint texCoord = glGetAttribLocation(shaderProgramme, "texcoord");
 	
 	this->vertexCount = 6;
 
-	glGenVertexArrays(1, &this->vertexArrayObject);
-	glBindVertexArray(this->vertexArrayObject);
+	glGenVertexArrays(1, &vertexArrayObject);
+	glBindVertexArray(vertexArrayObject);
 
-	glGenBuffers(1, &this->vertexBufferObject);
-	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferObject);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexBuffer) * sizeof(GLfloat), vertexBuffer, GL_STATIC_DRAW);
+	glGenBuffers(1, &vertexBufferObject);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexBuffer), vertexBuffer, GL_STATIC_DRAW);
 	
-	glGenBuffers(1, &this->indexArrayObject);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexArrayObject);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexCount * sizeof(GLushort), indices, GL_STATIC_DRAW);
+	glGenBuffers(1, &indexArrayObject);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexArrayObject);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexCount * sizeof(GLushort), &indices[0], GL_STATIC_DRAW);
 
 	//vertex position
 	glEnableVertexAttribArray(vertexPosition); 
@@ -48,7 +52,6 @@ Object::Object(GLint shaderProgramme, GLuint _texObject)
 	glBindVertexArray(NULL);
 	glBindBuffer(GL_ARRAY_BUFFER, NULL);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
-
 	this->texObject = _texObject;
 	
 }
@@ -59,5 +62,4 @@ Object::~Object(void)
 	glDeleteBuffers(1,&this->vertexBufferObject);
 	glDeleteBuffers(1,&this->vertexArrayObject);
 	glDeleteBuffers(1,&this->indexArrayObject);
-
 }

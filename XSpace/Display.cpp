@@ -1,18 +1,19 @@
 #include "Display.h"
 void Display::Update(){
 	unsigned int i;
+	glClearColor(1.0 ,0.0 ,0.0,1.0);
 	do{
 		glfwGetWindowSize(window, &this->viewportWidth, &this->viewportHeight);
 		glViewport(0, 0, this->viewportWidth, this->viewportHeight);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//for(i = 0 ; i < objects.size(); i ++){
-			objects[0].draw();
+		for(i = 0 ; i < objects.size(); i ++){
+			objects[i].draw();
 			//trimite catre shader matricele de transformate : modelare, vizualizare, proiectie
 			// glUniformMatrix4fv(glGetUniformLocation(this->shader_programme,"model_matrix"),1,false, glm::value_ptr(objects[i].model_mat));
 			// glUniformMatrix4fv(glGetUniformLocation(this->shader_programme,"view_matrix"),1,false, glm::value_ptr(view_mat));
 			// glUniformMatrix4fv(glGetUniformLocation(this->shader_programme,"projection_matrix"),1,false,glm::value_ptr(proj_mat));
-		//}
+		}
 		// Swap buffers
 		glfwSwapBuffers(this->window);
 		glfwPollEvents();
@@ -32,8 +33,6 @@ Display::Display(int width, int height, char* title)
 	}
 
 	glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	this->setWindow(glfwCreateWindow( width, height, title, NULL, NULL));
 
 	const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -54,6 +53,7 @@ Display::Display(int width, int height, char* title)
 	}
 
 	this->shader_programme = loadShaderProgramme();
+	glUseProgram(this->shader_programme);
 
 	//activare transparenta
 	glEnable(GL_BLEND);
@@ -76,7 +76,7 @@ Display::~Display(void)
 {
 	//destructor
 	glfwDefaultWindowHints();
-	//glfwDestroyWindow(this->window);
+//	glfwDestroyWindow(this->window);
 }
 
 
@@ -121,9 +121,10 @@ GLuint Display::loadShaderProgramme(){
 	glAttachShader(shader_programme, fs);
 	glAttachShader(shader_programme, vs);
 
-	glBindFragDataLocation(shader_programme, 0, "frag_colour");
+	//glBindFragDataLocation(shader_programme, 0, "frag_colour");
 
 	glLinkProgram(shader_programme);
+	
 	delete[] vertex_shader;
 	delete[] fragment_shader;
 
